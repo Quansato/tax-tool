@@ -55,7 +55,7 @@ body {
 } */
 
 .card h2 {
-    color: #4F8AFF;
+    color: #1E293B;
     margin-bottom: 24px;
     font-size: 1.6em;
     border-bottom: 2px solid #E2E8F0;
@@ -85,7 +85,7 @@ input[type="text"][inputmode="numeric"] {
 }
 
 input[type="text"][inputmode="numeric"]:focus {
-    border-color: #4F8AFF;
+    border-color: #1E293B;
     outline: none;
     box-shadow: 0 0 0 2px rgba(79, 138, 255, 0.2);
 }
@@ -112,13 +112,13 @@ input[type="number"], select {
 }
 
 input[type="number"]:focus, select:focus {
-    border-color: #4F8AFF;
+    border-color: #1E293B;
     box-shadow: 0 0 0 3px rgba(79, 138, 255, 0.2);
     outline: none;
 }
 
 .btn {
-    background: linear-gradient(135deg, #4F8AFF 0%, #00C1D4 100%);
+    background: #0067fd;
     color: white;
     padding: 14px 30px;
     border: none;
@@ -184,7 +184,7 @@ input[type="number"]:focus, select:focus {
 
 .tax-table th {
     background: #F1F5F9;
-    color: #4F8AFF;
+    color: #1E293B;
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.85em;
@@ -197,7 +197,7 @@ input[type="number"]:focus, select:focus {
 
 .info-box {
     background: rgba(79, 138, 255, 0.05);
-    border-left: 4px solid #4F8AFF;
+    border-left: 4px solid #1E293B;
     padding: 18px;
     margin: 20px 0;
     border-radius: 8px;
@@ -210,7 +210,7 @@ input[type="number"]:focus, select:focus {
 }
 
 .info-box h3 {
-    color: #667eea;
+    color: #1E293B;
     margin-bottom: 10px;
 }
 
@@ -250,7 +250,7 @@ input[type="number"]:focus, select:focus {
     position: relative;
     display: inline-block;
     cursor: help;
-    color: #667eea;
+    color: #1E293B;
     margin-left: 5px;
     top:2px;
 }
