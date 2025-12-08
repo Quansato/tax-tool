@@ -9,13 +9,13 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🧮 Công Cụ Tính Thuế TNCN 2026</h1>
+            <h1>🧮 Công cụ tính Thuế TNCN 2026</h1>
             <p>Áp dụng mức giảm trừ gia cảnh mới và biểu thuế 5 bậc</p>
         </div>
 
         <div class="main-content">
             <div class="card">
-                <h2>📝 Nhập Thông Tin Thu Nhập</h2>
+                <h2>📝 Nhập thông tin thu nhập</h2>
                 
                 <div class="form-group">
                     <label>Thu nhập hàng tháng (VNĐ)
@@ -23,7 +23,7 @@
                             <span class="tooltiptext">Tổng thu nhập trước thuế bao gồm lương cơ bản, phụ cấp, thưởng...</span>
                         </span>
                     </label>
-                    <input type="number" id="income" placeholder="Ví dụ: 25000000" min="0" step="100000">
+                    <input type="text" id="income" placeholder="Ví dụ: 25.000.000" inputmode="numeric" pattern="[0-9,.]*" data-value="25000000">
                 </div>
 
                 <div class="form-group">
@@ -48,7 +48,7 @@
                             <span class="tooltiptext">Nhập mức lương dùng để tính đóng bảo hiểm (10.5%)</span>
                         </span>
                     </label>
-                    <input type="number" id="insuranceSalary" placeholder="Ví dụ: 20000000" min="0" step="100000" value="0">
+                    <input type="text" id="insuranceSalary" placeholder="Ví dụ: 5.350.000" inputmode="numeric" pattern="[0-9,.]*" data-value="0">
                 </div>
 
                 <button class="btn" noscript="calculateTax()">Tính Thuế TNCN</button>
@@ -64,7 +64,7 @@
             </div>
 
             <div class="card">
-                <h2>💰 Kết Quả Tính Thuế</h2>
+                <h2>💰 Kết quả tính Thuế</h2>
                 
                 <div id="results">
                     <div class="result-item">

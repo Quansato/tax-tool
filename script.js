@@ -1,8 +1,47 @@
+// Hàm chuyển đổi chuỗi số đã định dạng thành số
+function parseFormattedNumber(formattedNumber) {
+    if (!formattedNumber) return 0;
+    return parseFloat(formattedNumber.replace(/\./g, '')) || 0;
+}
+
+// Hàm định dạng số thành chuỗi tiền tệ Việt Nam
 function formatCurrency(amount) {
     return new Intl.NumberFormat('vi-VN', { 
         style: 'currency', 
-        currency: 'VND' 
+        currency: 'VND',
+        maximumFractionDigits: 0
     }).format(amount);
+}
+
+// Hàm định dạng số nhập vào
+function formatCurrencyInput(value) {
+    // Xóa tất cả các ký tự không phải số
+    let number = value.replace(/\D/g, '');
+    
+    // Thêm dấu chấm phân cách hàng nghìn
+    number = number.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    
+    return number;
+}
+
+// Hàm xử lý sự kiện khi người dùng nhập liệu
+function handleCurrencyInput(input) {
+    // Lưu vị trí con trỏ
+    const cursorPosition = input.selectionStart;
+    const originalLength = input.value.length;
+    
+    // Định dạng giá trị
+    input.value = formatCurrencyInput(input.value);
+    
+    // Cập nhật giá trị thực tế trong thuộc tính data-value
+    input.setAttribute('data-value', input.value.replace(/\./g, ''));
+    
+    // Đặt lại vị trí con trỏ
+    const newLength = input.value.length;
+    const newPosition = cursorPosition + (newLength - originalLength);
+    input.setSelectionRange(newPosition, newPosition);
+    
+    return parseFloat(input.getAttribute('data-value')) || 0;
 }
 
 function calculateProgressiveTax(taxableIncome) {
@@ -31,9 +70,9 @@ function calculateProgressiveTax(taxableIncome) {
 
 function calculateTax() {
     // Lấy giá trị input
-    const income = parseFloat(document.getElementById('income').value) || 0;
+    const income = parseFloat(document.getElementById('income').getAttribute('data-value')) || 0;
     const dependents = parseInt(document.getElementById('dependents').value) || 0;
-    const insuranceSalary = parseFloat(document.getElementById('insuranceSalary').value) || 0;
+    const insuranceSalary = parseFloat(document.getElementById('insuranceSalary').getAttribute('data-value')) || 0;
     
     // Tính toán
     const insuranceAmount = insuranceSalary * 0.105; // 10.5% của lương đóng bảo hiểm
@@ -61,11 +100,39 @@ function calculateTax() {
     }, 10);
 }
 
-// Tự động tính khi người dùng nhập
-document.getElementById('income').addEventListener('input', calculateTax);
-document.getElementById('dependents').addEventListener('change', calculateTax);
-document.getElementById('insuranceSalary').addEventListener('input', calculateTax);
+// Thêm sự kiện cho các ô nhập liệu tiền tệ
+function initCurrencyInputs() {
+    const inputs = ['income', 'insuranceSalary'];
+    
+    inputs.forEach(id => {
+        const input = document.getElementById(id);
+        
+        // Xử lý sự kiện khi nhập liệu
+        input.addEventListener('input', function() {
+            handleCurrencyInput(this);
+            calculateTax();
+        });
+        
+        // Định dạng giá trị ban đầu
+        if (input.value) {
+            input.value = formatCurrencyInput(input.value);
+            input.setAttribute('data-value', input.value.replace(/\./g, ''));
+        }
+    });
+}
 
-// Tính mẫu ban đầu
-document.getElementById('income').value = 25000000;
-calculateTax();
+// Khởi tạo khi tải trang
+document.addEventListener('DOMContentLoaded', function() {
+    initCurrencyInputs();
+    
+    // Thêm sự kiện cho dropdown phụ thuộc
+    document.getElementById('dependents').addEventListener('change', calculateTax);
+    
+    // Tính toán lần đầu
+    calculateTax();
+    
+    // Định dạng giá trị ban đầu cho thu nhập
+    const incomeInput = document.getElementById('income');
+    incomeInput.value = formatCurrencyInput('25000000');
+    incomeInput.setAttribute('data-value', '25000000');
+});
