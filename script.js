@@ -91,13 +91,6 @@ function calculateTax() {
     document.getElementById('taxableIncome').textContent = formatCurrency(taxableIncome);
     document.getElementById('taxAmount').textContent = formatCurrency(taxAmount);
     document.getElementById('netIncome').textContent = formatCurrency(netIncome);
-    
-    // Hiệu ứng highlight kết quả
-    const highlight = document.querySelector('.highlight');
-    highlight.style.animation = 'none';
-    setTimeout(() => {
-        highlight.style.animation = 'fadeInUp 0.5s ease';
-    }, 10);
 }
 
 // Thêm sự kiện cho các ô nhập liệu tiền tệ

@@ -235,6 +235,7 @@ input[type="number"]:focus, select:focus {
     cursor: help;
     color: #667eea;
     margin-left: 5px;
+    top:2px;
 }
 
 .tooltip .tooltiptext {
