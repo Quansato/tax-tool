@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tính Thuế TNCN 2026 - Công cụ tính thuế thu nhập cá nhân</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -19,19 +23,23 @@
         <div class="main-content">
             <div class="card">
                 <h2>📝 Nhập thông tin thu nhập</h2>
-                
+
                 <div class="form-group">
                     <label>Thu nhập hàng tháng (VNĐ)
-                        <span class="tooltip"><img src="resource/icon/info_10945058.png" alt="" width="16px" height="16px"> 
-                            <span class="tooltiptext">Tổng thu nhập trước thuế bao gồm lương cơ bản, phụ cấp, thưởng...</span>
+                        <span class="tooltip"><img src="resource/icon/info_10945058.png" alt="" width="16px"
+                                height="16px">
+                            <span class="tooltiptext">Tổng thu nhập trước thuế bao gồm lương cơ bản, phụ cấp,
+                                thưởng...</span>
                         </span>
                     </label>
-                    <input type="text" id="income" placeholder="Ví dụ: 25.000.000" inputmode="numeric" pattern="[0-9,.]*" data-value="25000000">
+                    <input type="text" id="income" placeholder="Ví dụ: 25.000.000" inputmode="numeric"
+                        pattern="[0-9,.]*" data-value="25000000">
                 </div>
 
                 <div class="form-group">
                     <label>Số người phụ thuộc
-                        <span class="tooltip"><img src="resource/icon/info_10945058.png" alt="" width="16px" height="16px">
+                        <span class="tooltip"><img src="resource/icon/info_10945058.png" alt="" width="16px"
+                                height="16px">
                             <span class="tooltiptext">Con dưới 18 tuổi, vợ/chồng không có thu nhập, cha mẹ già...</span>
                         </span>
                     </label>
@@ -47,11 +55,13 @@
 
                 <div class="form-group">
                     <label>Lương đóng bảo hiểm (VNĐ)
-                        <span class="tooltip"><img src="resource/icon/info_10945058.png" alt="" width="16px" height="16px">
+                        <span class="tooltip"><img src="resource/icon/info_10945058.png" alt="" width="16px"
+                                height="16px">
                             <span class="tooltiptext">Nhập mức lương dùng để tính đóng bảo hiểm (10.5%)</span>
                         </span>
                     </label>
-                    <input type="text" id="insuranceSalary" placeholder="Ví dụ: 5.350.000" inputmode="numeric" pattern="[0-9,.]*" data-value="0">
+                    <input type="text" id="insuranceSalary" placeholder="Ví dụ: 5.350.000" inputmode="numeric"
+                        pattern="[0-9,.]*" data-value="0">
                 </div>
 
                 <button class="btn" noscript="calculateTax()">Tính Thuế TNCN</button>
@@ -68,28 +78,28 @@
 
             <div class="card">
                 <h2>💰 Kết quả tính Thuế</h2>
-                
+
                 <div id="results">
                     <div class="result-item">
                         <span class="result-label">Thu nhập ban đầu:</span>
                         <span class="result-value" id="originalIncome">0 đ</span>
                     </div>
-                    
+
                     <div class="result-item">
                         <span class="result-label">Bảo hiểm bắt buộc (10.5%):</span>
                         <span class="result-value" id="insuranceAmount">0 đ</span>
                     </div>
-                    
+
                     <div class="result-item">
                         <span class="result-label">Giảm trừ gia cảnh:</span>
                         <span class="result-value" id="deduction">0 đ</span>
                     </div>
-                    
+
                     <div class="result-item">
                         <span class="result-label">Thu nhập tính thuế:</span>
                         <span class="result-value" id="taxableIncome">0 đ</span>
                     </div>
-                    
+
                     <div class="highlight">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <span style="font-size: 1.1em;">Thuế TNCN phải nộp:</span>
@@ -102,7 +112,7 @@
                     </div>
                 </div>
 
-                <h3 style="margin-top: 30px; color: #667eea;">📊 Biểu Thuế Lũy Tiến 2026</h3>
+                <h3 style="margin-top: 30px; color: #667eea;">📊 Biểu Thuế lũy tiến 2026</h3>
                 <table class="tax-table">
                     <thead>
                         <tr>
@@ -143,8 +153,8 @@
         </div>
 
         <div class="card" style="margin-top: 20px;">
-            <h2>📚 Hướng Dẫn Chi Tiết</h2>
-            
+            <h2>📚 Hướng dẫn chi tiết</h2>
+
             <div class="info-box">
                 <h3>1. Công thức tính thuế TNCN:</h3>
                 <p><strong>Thu nhập tính thuế = Tổng thu nhập - Bảo hiểm - Giảm trừ gia cảnh</strong></p>
@@ -178,4 +188,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
