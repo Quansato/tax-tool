@@ -182,6 +182,14 @@ input[type="number"]:focus, select:focus {
     border-bottom: 1px solid #e0e0e0;
 }
 
+/* .tax-table th, .tax-table td.level {
+    text-align: center !important;
+} */
+
+/* .tax-table th, .tax-table td.percent {
+    text-align: center !important;
+} */
+
 .tax-table th {
     background: #F1F5F9;
     color: #1E293B;

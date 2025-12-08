@@ -17,6 +17,29 @@
     <link rel="apple-touch-icon" href="/resource/icon/repair_956125.png">
     
     <title>Tính Thuế TNCN 2026 - Công cụ tính thuế thu nhập cá nhân</title>
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Công cụ tính Thuế TNCN 2026",
+      "description": "Tính toán thuế thu nhập cá nhân chính xác dựa trên thu nhập và số người phụ thuộc 2026",
+      "url": "https://nquan.com/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "VND"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "Tax Tool"
+      }
+    }
+    </script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -25,33 +48,39 @@
     <link rel="stylesheet" href="index.css">
 </head>
 
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>🧮 Công cụ tính Thuế TNCN 2026</h1>
-            <p>Áp dụng mức giảm trừ gia cảnh mới và biểu thuế 5 bậc</p>
-        </div>
+<body itemscope itemtype="https://schema.org/WebPage">
+    <div class="container" role="main">
+        <header class="header" role="banner">
+            <h1 itemprop="headline">🧮 Công cụ tính Thuế TNCN 2026</h1>
+            <p itemprop="description">Áp dụng mức giảm trừ gia cảnh mới và biểu thuế 5 bậc</p>
+        </header>
 
         <div class="main-content">
-            <div class="card">
-                <h2>📝 Nhập thông tin thu nhập</h2>
+            <div class="card" itemscope itemtype="https://schema.org/Calculator" role="form" aria-label="Nhập thông tin tính thuế">
+                <h2>📝 <span itemprop="name">Nhập thông tin thu nhập</span></h2>
 
                 <div class="form-group">
-                    <label>Thu nhập hàng tháng (VNĐ)
-                        <span class="tooltip"><img src="resource/icon/info_10945058.png" alt="icon" width="16px"
-                                height="16px">
-                            <span class="tooltiptext">Tổng thu nhập trước thuế bao gồm lương cơ bản, phụ cấp,
-                                thưởng...</span>
+                    <label for="income">Thu nhập hàng tháng (VNĐ)
+                        <span class="tooltip">
+                            <img src="resource/icon/info_10945058.png" alt="Thông tin thu nhập" width="16" height="16" loading="lazy">
+                            <span class="tooltiptext">Tổng thu nhập trước thuế bao gồm lương cơ bản, phụ cấp, thưởng...</span>
                         </span>
                     </label>
-                    <input type="text" id="income" placeholder="Ví dụ: 25.000.000" inputmode="numeric"
-                        pattern="[0-9,.]*" data-value="25000000">
+                    <input type="text" 
+                           id="income" 
+                           name="income"
+                           inputmode="numeric"
+                           pattern="[0-9,.]*" 
+                           placeholder="Ví dụ: 25.000.000"
+                           data-value="25000000"
+                           aria-required="true"
+                           aria-describedby="incomeHelp">
                 </div>
 
                 <div class="form-group">
-                    <label>Số người phụ thuộc
-                        <span class="tooltip"><img src="resource/icon/info_10945058.png" alt="icon" width="16px"
-                                height="16px">
+                    <label for="dependents">Số người phụ thuộc
+                        <span class="tooltip">
+                            <img src="resource/icon/info_10945058.png" alt="Thông tin người phụ thuộc" width="16" height="16" loading="lazy">
                             <span class="tooltiptext">Con dưới 18 tuổi, vợ/chồng không có thu nhập, cha mẹ già...</span>
                         </span>
                     </label>
@@ -66,9 +95,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Lương đóng bảo hiểm (VNĐ)
-                        <span class="tooltip"><img src="resource/icon/info_10945058.png" alt="icon" width="16px"
-                                height="16px">
+                    <label for="insuranceSalary">Lương đóng bảo hiểm (VNĐ)
+                        <span class="tooltip">
+                            <img src="resource/icon/info_10945058.png" alt="Thông tin lương đóng bảo hiểm" width="16" height="16" loading="lazy">
                             <span class="tooltiptext">Nhập mức lương dùng để tính đóng bảo hiểm (10.5%)</span>
                         </span>
                     </label>
@@ -135,29 +164,29 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
+                            <td class="level">1</td>
                             <td>Đến 10 triệu</td>
-                            <td>5%</td>
+                            <td class="percent">5%</td>
                         </tr>
                         <tr>
-                            <td>2</td>
+                            <td class="level">2</td>
                             <td>Trên 10 - 30 triệu</td>
-                            <td>15%</td>
+                            <td class="percent">15%</td>
                         </tr>
                         <tr>
-                            <td>3</td>
+                            <td class="level">3</td>
                             <td>Trên 30 - 60 triệu</td>
-                            <td>25%</td>
+                            <td class="percent">25%</td>
                         </tr>
                         <tr>
-                            <td>4</td>
+                            <td class="level">4</td>
                             <td>Trên 60 - 100 triệu</td>
-                            <td>30%</td>
+                            <td class="percent">30%</td>
                         </tr>
                         <tr>
-                            <td>5</td>
+                            <td class="level">5</td>
                             <td>Trên 100 triệu</td>
-                            <td>35%</td>
+                            <td class="percent">35%</td>
                         </tr>
                     </tbody>
                 </table>
