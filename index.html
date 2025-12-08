@@ -43,13 +43,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Đóng bảo hiểm bắt buộc
-                        <span class="badge new">Mới</span>
+                    <label>Lương đóng bảo hiểm (VNĐ)
+                        <span class="tooltip">ℹ️
+                            <span class="tooltiptext">Nhập mức lương dùng để tính đóng bảo hiểm (10.5%)</span>
+                        </span>
                     </label>
-                    <select id="insurance">
-                        <option value="yes">Có (10.5% lương)</option>
-                        <option value="no">Không</option>
-                    </select>
+                    <input type="number" id="insuranceSalary" placeholder="Ví dụ: 20000000" min="0" step="100000" value="0">
                 </div>
 
                 <button class="btn" noscript="calculateTax()">Tính Thuế TNCN</button>

@@ -33,10 +33,10 @@ function calculateTax() {
     // Lấy giá trị input
     const income = parseFloat(document.getElementById('income').value) || 0;
     const dependents = parseInt(document.getElementById('dependents').value) || 0;
-    const hasInsurance = document.getElementById('insurance').value === 'yes';
+    const insuranceSalary = parseFloat(document.getElementById('insuranceSalary').value) || 0;
     
     // Tính toán
-    const insuranceAmount = hasInsurance ? income * 0.105 : 0;
+    const insuranceAmount = insuranceSalary * 0.105; // 10.5% của lương đóng bảo hiểm
     const personalDeduction = 15500000; // 15.5 triệu
     const dependentDeduction = 6200000 * dependents; // 6.2 triệu/người
     const totalDeduction = personalDeduction + dependentDeduction;
@@ -64,7 +64,7 @@ function calculateTax() {
 // Tự động tính khi người dùng nhập
 document.getElementById('income').addEventListener('input', calculateTax);
 document.getElementById('dependents').addEventListener('change', calculateTax);
-document.getElementById('insurance').addEventListener('change', calculateTax);
+document.getElementById('insuranceSalary').addEventListener('input', calculateTax);
 
 // Tính mẫu ban đầu
 document.getElementById('income').value = 25000000;
