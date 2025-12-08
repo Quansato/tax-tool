@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính Thuế TNCN 2026 - Công cụ tính thuế thu nhập cá nhân</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧮 Công Cụ Tính Thuế TNCN 2026</h1>
+            <p>Áp dụng mức giảm trừ gia cảnh mới và biểu thuế 5 bậc</p>
+        </div>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>📝 Nhập Thông Tin Thu Nhập</h2>
+                
+                <div class="form-group">
+                    <label>Thu nhập hàng tháng (VNĐ)
+                        <span class="tooltip">ℹ️
+                            <span class="tooltiptext">Tổng thu nhập trước thuế bao gồm lương cơ bản, phụ cấp, thưởng...</span>
+                        </span>
+                    </label>
+                    <input type="number" id="income" placeholder="Ví dụ: 25000000" min="0" step="100000">
+                </div>
+
+                <div class="form-group">
+                    <label>Số người phụ thuộc
+                        <span class="tooltip">ℹ️
+                            <span class="tooltiptext">Con dưới 18 tuổi, vợ/chồng không có thu nhập, cha mẹ già...</span>
+                        </span>
+                    </label>
+                    <select id="dependents">
+                        <option value="0">0 người</option>
+                        <option value="1">1 người</option>
+                        <option value="2">2 người</option>
+                        <option value="3">3 người</option>
+                        <option value="4">4 người</option>
+                        <option value="5">5 người trở lên</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Đóng bảo hiểm bắt buộc
+                        <span class="badge new">Mới</span>
+                    </label>
+                    <select id="insurance">
+                        <option value="yes">Có (10.5% lương)</option>
+                        <option value="no">Không</option>
+                    </select>
+                </div>
+
+                <button class="btn" noscript="calculateTax()">Tính Thuế TNCN</button>
+
+                <div class="info-box">
+                    <h3>📌 Lưu ý quan trọng:</h3>
+                    <ul style="margin-left: 20px;">
+                        <li>Mức giảm trừ bản thân: <strong>15,5 triệu/tháng</strong></li>
+                        <li>Mức giảm trừ người phụ thuộc: <strong>6,2 triệu/người</strong></li>
+                        <li>Áp dụng từ: <strong>01/01/2026</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>💰 Kết Quả Tính Thuế</h2>
+                
+                <div id="results">
+                    <div class="result-item">
+                        <span class="result-label">Thu nhập ban đầu:</span>
+                        <span class="result-value" id="originalIncome">0 đ</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Bảo hiểm bắt buộc (10.5%):</span>
+                        <span class="result-value" id="insuranceAmount">0 đ</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Giảm trừ gia cảnh:</span>
+                        <span class="result-value" id="deduction">0 đ</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Thu nhập tính thuế:</span>
+                        <span class="result-value" id="taxableIncome">0 đ</span>
+                    </div>
+                    
+                    <div class="highlight">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span style="font-size: 1.1em;">Thuế TNCN phải nộp:</span>
+                            <span style="font-size: 1.3em; font-weight: bold;" id="taxAmount">0 đ</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Thu nhập thực nhận:</span>
+                            <span style="font-weight: bold;" id="netIncome">0 đ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px; color: #667eea;">📊 Biểu Thuế Lũy Tiến 2026</h3>
+                <table class="tax-table">
+                    <thead>
+                        <tr>
+                            <th>Bậc</th>
+                            <th>Thu nhập tính thuế/tháng</th>
+                            <th>Thuế suất</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Đến 10 triệu</td>
+                            <td>5%</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Trên 10 - 30 triệu</td>
+                            <td>15%</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Trên 30 - 60 triệu</td>
+                            <td>25%</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Trên 60 - 100 triệu</td>
+                            <td>30%</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Trên 100 triệu</td>
+                            <td>35%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 20px;">
+            <h2>📚 Hướng Dẫn Chi Tiết</h2>
+            
+            <div class="info-box">
+                <h3>1. Công thức tính thuế TNCN:</h3>
+                <p><strong>Thu nhập tính thuế = Tổng thu nhập - Bảo hiểm - Giảm trừ gia cảnh</strong></p>
+                <p><strong>Thuế TNCN = Thu nhập tính thuế × Thuế suất (theo biểu lũy tiến)</strong></p>
+            </div>
+
+            <div class="info-box">
+                <h3>2. Ví dụ minh họa:</h3>
+                <p>Ông A có thu nhập 30 triệu/tháng, có 1 người phụ thuộc:</p>
+                <ul style="margin-left: 20px;">
+                    <li>Thu nhập: 30.000.000 đ</li>
+                    <li>Bảo hiểm (10.5%): 3.150.000 đ</li>
+                    <li>Giảm trừ bản thân: 15.500.000 đ</li>
+                    <li>Giảm trừ người phụ thuộc: 6.200.000 đ</li>
+                    <li>Thu nhập tính thuế: 30.000.000 - 3.150.000 - 15.500.000 - 6.200.000 = 5.150.000 đ</li>
+                    <li>Thuế phải nộp: 5.150.000 × 5% = 257.500 đ</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>3. Các khoản được miễn thuế từ 2026:</h3>
+                <ul style="margin-left: 20px;">
+                    <li>Thu nhập từ tiền lương của nhân lực công nghệ số chất lượng cao (5 năm đầu)</li>
+                    <li>Thu nhập từ thực hiện nhiệm vụ khoa học, công nghệ và đổi mới sáng tạo</li>
+                    <li>Thu nhập từ học bổng, bảo hiểm nhân thọ</li>
+                    <li>Tiền lương hưu từ BHXH</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
