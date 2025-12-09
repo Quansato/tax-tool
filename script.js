@@ -115,7 +115,33 @@ function initCurrencyInputs() {
 }
 
 // Khởi tạo khi tải trang
+// Xử lý FAQ Accordion
 document.addEventListener('DOMContentLoaded', function() {
+    // Lấy tất cả các câu hỏi FAQ
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    // Thêm sự kiện click cho mỗi câu hỏi
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const faqItem = question.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Đóng tất cả các câu hỏi khác
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Nếu câu hỏi hiện tại chưa được mở, mở nó
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        });
+    });
+    
+    // Mở câu hỏi đầu tiên mặc định
+    if (faqQuestions.length > 0) {
+        faqQuestions[0].parentElement.classList.add('active');
+    }
     initCurrencyInputs();
     
     // Thêm sự kiện cho dropdown phụ thuộc

@@ -203,6 +203,137 @@ input[type="number"]:focus, select:focus {
     background: #f8f9fa;
 }
 
+.faq-container {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.faq-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.faq-header h2 {
+    margin: 0;
+    font-size: 1.8em;
+    color: #1E293B;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.faq-header h2::before {
+    content: '❓';
+    font-size: 1.2em;
+}
+
+.faq-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.faq-item {
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.faq-item:last-child {
+    margin-bottom: 0;
+}
+
+.faq-question {
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    color: #1E293B;
+    background: #F8FAFC;
+    transition: all 0.3s ease;
+}
+
+.faq-question:hover {
+    background: #F1F5F9;
+}
+
+.faq-question::after {
+    content: '\25BC';
+    font-size: 0.8em;
+    color: #64748B;
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-question {
+    color: #1E40AF;
+    background: #EFF6FF;
+}
+
+.faq-item.active .faq-question::after {
+    transform: rotate(180deg);
+    color: #1E40AF;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0 20px;
+    background: white;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 1000px;
+    padding: 20px;
+    border-top: 1px solid #E2E8F0;
+}
+
+.faq-answer p {
+    margin: 0 0 12px 0;
+    line-height: 1.6;
+}
+
+.faq-answer ul {
+    margin: 12px 0;
+    padding-left: 20px;
+}
+
+.faq-answer li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.faq-answer .reference {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px dashed #E2E8F0;
+    font-size: 0.9em;
+    color: #64748B;
+}
+
+.faq-answer .reference a {
+    color: #3B82F6;
+    text-decoration: none;
+    margin: 0 5px;
+    transition: color 0.2s ease;
+}
+
+.faq-answer .reference a:hover {
+    color: #2563EB;
+    text-decoration: underline;
+}
+
+.faq-answer .reference a:first-child {
+    margin-left: 8px;
+}
+
 .info-box {
     background: rgba(79, 138, 255, 0.05);
     border-left: 4px solid #1E293B;
@@ -220,6 +351,15 @@ input[type="number"]:focus, select:focus {
 .info-box h3 {
     color: #1E293B;
     margin-bottom: 10px;
+}
+
+.info-box ul {
+    margin: 10px 0 20px 25px;
+    line-height: 1.8;
+}
+
+.info-box ul li {
+    margin-bottom: 8px;
 }
 
 @keyframes fadeInDown {
