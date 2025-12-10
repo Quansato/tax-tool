@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://nquan.com/sitemap.xml
+Sitemap: https://nquan.info.vn/sitemap.xml
 
 # Disallow admin or private directories if any
 Disallow: /admin/
