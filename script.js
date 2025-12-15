@@ -131,7 +131,7 @@ function calculateTax(showPopup = false) {
     document.getElementById('popupNetIncome').textContent = formatCurrency(netIncome);
     
     // Nếu được yêu cầu hiển thị popup
-    if (showPopup) {
+    if (showPopup && window.innerWidth <= 840) {
         showTaxResultPopup();
     }
 }
