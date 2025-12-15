@@ -68,7 +68,19 @@ function calculateProgressiveTax(taxableIncome) {
     return tax;
 }
 
-function calculateTax(isBtn) {
+function showTaxResultPopup() {
+    const popup = document.getElementById('taxResultPopup');
+    popup.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // Prevent scrolling when popup is open
+}
+
+function closeTaxResultPopup() {
+    const popup = document.getElementById('taxResultPopup');
+    popup.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+}
+
+function calculateTax(showPopup = false) {
     // Lấy giá trị input
     const income = parseFloat(document.getElementById('income').getAttribute('data-value')) || 0;
     const dependents = parseInt(document.getElementById('dependents').value) || 0;
@@ -84,13 +96,26 @@ function calculateTax(isBtn) {
     const taxAmount = calculateProgressiveTax(taxableIncome);
     const netIncome = income - insuranceAmount - taxAmount;
     
-    // Hiển thị kết quả
+    // Cập nhật kết quả trên giao diện chính
     document.getElementById('originalIncome').textContent = formatCurrency(income);
     document.getElementById('insuranceAmount').textContent = formatCurrency(insuranceAmount);
     document.getElementById('deduction').textContent = formatCurrency(totalDeduction);
     document.getElementById('taxableIncome').textContent = formatCurrency(taxableIncome);
     document.getElementById('taxAmount').textContent = formatCurrency(taxAmount);
     document.getElementById('netIncome').textContent = formatCurrency(netIncome);
+    
+    // Cập nhật kết quả trong popup
+    document.getElementById('popupOriginalIncome').textContent = formatCurrency(income);
+    document.getElementById('popupInsuranceAmount').textContent = formatCurrency(insuranceAmount);
+    document.getElementById('popupDeduction').textContent = formatCurrency(totalDeduction);
+    document.getElementById('popupTaxableIncome').textContent = formatCurrency(taxableIncome);
+    document.getElementById('popupTaxAmount').textContent = formatCurrency(taxAmount);
+    document.getElementById('popupNetIncome').textContent = formatCurrency(netIncome);
+    
+    // Nếu được yêu cầu hiển thị popup
+    if (showPopup) {
+        showTaxResultPopup();
+    }
 }
 
 // Thêm sự kiện cho các ô nhập liệu tiền tệ
@@ -119,8 +144,6 @@ function initCurrencyInputs() {
 document.addEventListener('DOMContentLoaded', function() {
     // Lấy tất cả các câu hỏi FAQ
     const faqQuestions = document.querySelectorAll('.faq-question');
-    const btn = document.getElementById("tax");
-    btn.addEventListener("click",calculateTax,true)
     
     // Thêm sự kiện click cho mỗi câu hỏi
     faqQuestions.forEach(question => {
@@ -144,13 +167,40 @@ document.addEventListener('DOMContentLoaded', function() {
     if (faqQuestions.length > 0) {
         faqQuestions[0].parentElement.classList.add('active');
     }
+    
+    // Khởi tạo các ô nhập tiền tệ
     initCurrencyInputs();
     
+    // Thêm sự kiện cho nút tính thuế
+    document.getElementById('tax').addEventListener('click', function() {
+        calculateTax(true); // true để hiển thị popup
+    });
+    
     // Thêm sự kiện cho dropdown phụ thuộc
-    document.getElementById('dependents').addEventListener('change', calculateTax);
+    document.getElementById('dependents').addEventListener('change', function() {
+        calculateTax(false); // false để không hiển thị popup
+    });
+    
+    // Thêm sự kiện cho nút đóng popup
+    document.querySelector('.close-popup')?.addEventListener('click', closeTaxResultPopup);
+    document.querySelector('.close-popup-btn')?.addEventListener('click', closeTaxResultPopup);
+    
+    // Đóng popup khi click bên ngoài nội dung
+    document.getElementById('taxResultPopup')?.addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeTaxResultPopup();
+        }
+    });
+    
+    // Đóng popup khi nhấn phím Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeTaxResultPopup();
+        }
+    });
     
     // Tính toán lần đầu
-    calculateTax();
+    calculateTax(false);
     
     // Định dạng giá trị ban đầu cho thu nhập
     const incomeInput = document.getElementById('income');

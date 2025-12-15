@@ -390,6 +390,41 @@
         </section>
     </div>
 
+    <!-- Popup for showing tax results -->
+    <div id="taxResultPopup" class="popup-overlay">
+        <div class="popup-content">
+            <button class="close-popup" aria-label="Đóng cửa sổ popup">×</button>
+            <h2>💰 Kết quả tính Thuế TNCN</h2>
+            <div class="result-item">
+                <span class="result-label">Thu nhập ban đầu:</span>
+                <span class="result-value" id="popupOriginalIncome">0 đ</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Bảo hiểm bắt buộc (10.5%):</span>
+                <span class="result-value" id="popupInsuranceAmount">0 đ</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Giảm trừ gia cảnh:</span>
+                <span class="result-value" id="popupDeduction">0 đ</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Thu nhập tính thuế:</span>
+                <span class="result-value" id="popupTaxableIncome">0 đ</span>
+            </div>
+            <div class="highlight" style="margin: 15px 0;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="font-size: 1.1em;">Thuế TNCN phải nộp:</span>
+                    <span style="font-size: 1.3em; font-weight: bold;" id="popupTaxAmount">0 đ</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span>Thu nhập thực nhận:</span>
+                    <span style="font-weight: bold;" id="popupNetIncome">0 đ</span>
+                </div>
+            </div>
+            <button class="btn close-popup-btn" style="width: 100%;">Đóng</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 
