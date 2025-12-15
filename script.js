@@ -68,7 +68,7 @@ function calculateProgressiveTax(taxableIncome) {
     return tax;
 }
 
-function calculateTax() {
+function calculateTax(isBtn) {
     // Lấy giá trị input
     const income = parseFloat(document.getElementById('income').getAttribute('data-value')) || 0;
     const dependents = parseInt(document.getElementById('dependents').value) || 0;
@@ -119,6 +119,8 @@ function initCurrencyInputs() {
 document.addEventListener('DOMContentLoaded', function() {
     // Lấy tất cả các câu hỏi FAQ
     const faqQuestions = document.querySelectorAll('.faq-question');
+    const btn = document.getElementById("tax");
+    btn.addEventListener("click",calculateTax,true)
     
     // Thêm sự kiện click cho mỗi câu hỏi
     faqQuestions.forEach(question => {
