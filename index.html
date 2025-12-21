@@ -62,8 +62,6 @@
     ]
     }
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912609147593678"
-        crossorigin="anonymous"></script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8NMZE6K58"></script>
@@ -485,6 +483,17 @@
     </div>
 
     <script defer src="script.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+  setTimeout(function () {
+    var s = document.createElement('script');
+    s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912609147593678";
+    s.async = true;
+    s.crossOrigin = "anonymous";
+    document.body.appendChild(s);
+  }, 1500);
+});
+</script>
 </body>
 
 </html>
