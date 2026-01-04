@@ -1,4 +1,4 @@
-// Hàm hiển thị thông báo tạm thời
+// Function to show temporary toast notification
 function showToast(message, duration = 2000) {
     const toast = document.createElement('div');
     toast.textContent = message;
@@ -29,7 +29,7 @@ function showToast(message, duration = 2000) {
     }, duration);
 }
 
-// Hàm hiển thị preview ảnh
+// Function to show image preview
 function showImagePreview(file) {
     const reader = new FileReader();
     const previewImg = document.getElementById('image-preview');
@@ -43,7 +43,7 @@ function showImagePreview(file) {
     reader.readAsDataURL(file);
 }
 
-// Hàm xoá ảnh preview
+// Function to remove image preview
 function removeImagePreview() {
     const previewContainer = document.getElementById('image-preview-container');
     const fileInput = document.getElementById('input-qr-file');
@@ -60,22 +60,22 @@ function removeImagePreview() {
     fileInfo.style.display = 'none';
 }
 
-// Hàm xử lý khi chọn file ảnh
+// Function to handle image file selection
 function handleImageFile(file) {
     const fileInfo = document.getElementById('file-info');
     
     if (!file.type.startsWith('image/')) {
-        fileInfo.textContent = 'Vui lòng chọn file ảnh hợp lệ';
+        fileInfo.textContent = 'Please select a valid image file';
         fileInfo.style.display = 'block';
         fileInfo.style.color = 'red';
         return false;
     }
     
-    fileInfo.textContent = `Đã chọn: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`;
+    fileInfo.textContent = `Selected: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`;
     fileInfo.style.display = 'block';
     fileInfo.style.color = 'inherit';
     
-    // Hiển thị preview ảnh
+    // Show image preview
     showImagePreview(file);
     return true;
 }
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dropZone = document.getElementById('drop-zone');
     const fileInfo = document.getElementById('file-info');
 
-    // Xử lý kéo thả file
+    // Handle drag and drop files
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
         dropZone.addEventListener(eventName, preventDefaults, false);
     });
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dropZone.classList.remove('drag-over');
     }
 
-    // Xử lý thả file
+    // Handle file drop
     dropZone.addEventListener('drop', handleDrop, false);
 
     function handleDrop(e) {
@@ -133,19 +133,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Xử lý click vào drop zone để chọn file
+    // Handle click on drop zone to select file
     dropZone.addEventListener('click', () => {
         inputQRFile.click();
     });
 
-    // Xử lý chọn file
+    // Handle file selection
     inputQRFile.addEventListener('change', (e) => {
         if (inputQRFile.files.length > 0) {
             handleImageFile(inputQRFile.files[0]);
         }
     });
 
-    // Xử lý dán ảnh (Ctrl+V)
+    // Handle paste image (Ctrl+V)
     document.addEventListener('paste', (e) => {
         const items = (e.clipboardData || window.clipboardData).items;
         
@@ -156,12 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 dataTransfer.items.add(blob);
                 inputQRFile.files = dataTransfer.files;
                 
-                // Cập nhật thông tin file và hiển thị preview
-                fileInfo.textContent = 'Đã dán ảnh từ clipboard';
+                // Update file info and show preview
+                fileInfo.textContent = 'Image pasted from clipboard';
                 fileInfo.style.display = 'block';
                 fileInfo.style.color = 'inherit';
                 
-                // Hiển thị preview ảnh
+                // Show image preview
                 showImagePreview(blob);
                 
                 break;
@@ -169,18 +169,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // Xử lý sự kiện click nút xoá ảnh
+    // Handle remove image button click
     document.getElementById('remove-image').addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         removeImagePreview();
     });
     
-    // Xử lý khi form được submit
+    // Handle form submission
     formScan.addEventListener('submit', (e) => {
         if (!inputQRFile.files || inputQRFile.files.length === 0) {
             e.preventDefault();
-            showToast('Vui lòng chọn hoặc dán ảnh để quét mã QR');
+            showToast('Please select or paste an image to scan QR code');
             return false;
         }
         return true;
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 img.src = URL.createObjectURL(logoFile);
             }
         } catch (err) {
-            alert('Lỗi khi tạo mã QR: ' + err.message);
+            alert('Error creating QR code: ' + err.message);
         }
     }
 
@@ -245,13 +245,13 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const text = inputText.value.trim();
         if (!text) {
-            alert('Vui lòng nhập văn bản để tạo mã QR.');
+            alert('Please enter text to create QR code.');
             inputText.focus();
             return;
         }
         let size = parseInt(inputSize.value, 10);
         if (isNaN(size) || size < 100 || size > 1000) {
-            alert('Kích thước mã QR phải từ 100 đến 1000 px.');
+            alert('QR code size must be from 100 to 1000 px.');
             inputSize.focus();
             return;
         }
@@ -261,44 +261,44 @@ document.addEventListener('DOMContentLoaded', () => {
         generateQRCode(text, size, color, logoFile);
     });
 
-    // Sao chép văn bản từ textarea
+    // Copy text from textarea
     const copyTextBtn = document.getElementById('copy-text-btn');
     const outputText = document.getElementById('output-text');
     
     copyTextBtn.addEventListener('click', async () => {
         if (!outputText.value.trim()) {
-            showToast('Không có nội dung để sao chép');
+            showToast('No content to copy');
             return;
         }
         
         try {
             await navigator.clipboard.writeText(outputText.value);
             copyTextBtn.classList.add('copied');
-            copyTextBtn.innerHTML = '<span class="copy-icon">✓</span><span class="copy-text">Đã sao chép</span>';
-            showToast('Đã sao chép vào clipboard');
+            copyTextBtn.innerHTML = '<span class="copy-icon">✓</span><span class="copy-text">Copied</span>';
+            showToast('Copied to clipboard');
             
             setTimeout(() => {
                 copyTextBtn.classList.remove('copied');
-                copyTextBtn.innerHTML = '<span class="copy-icon">📋</span><span class="copy-text">Sao chép</span>';
+                copyTextBtn.innerHTML = '<span class="copy-icon">📋</span><span class="copy-text">Copy</span>';
             }, 2000);
         } catch (err) {
-            console.error('Lỗi khi sao chép: ', err);
-            showToast('Lỗi khi sao chép');
+            console.error('Error copying: ', err);
+            showToast('Error copying');
         }
     });
     
-    // Sao chép ảnh QR
+    // Copy QR image
     const copyQrBtn = document.getElementById('copy-qr-btn');
     const qrCanvas = document.getElementById('qr-canvas');
     
     copyQrBtn.addEventListener('click', async () => {
         if (qrCanvas.width === 0 || qrCanvas.height === 0) {
-            showToast('Không có mã QR để sao chép');
+            showToast('No QR code to copy');
             return;
         }
         
         try {
-            // Chuyển canvas thành blob
+            // Convert canvas to blob
             qrCanvas.toBlob(async (blob) => {
                 try {
                     await navigator.clipboard.write([
@@ -306,36 +306,36 @@ document.addEventListener('DOMContentLoaded', () => {
                     ]);
                     
                     copyQrBtn.classList.add('copied');
-                    copyQrBtn.innerHTML = '<span class="copy-icon">✓</span><span class="copy-text">Đã sao chép</span>';
-                    showToast('Đã sao chép ảnh QR vào clipboard');
+                    copyQrBtn.innerHTML = '<span class="copy-icon">✓</span><span class="copy-text">Copied</span>';
+                    showToast('QR image copied to clipboard');
                     
                     setTimeout(() => {
                         copyQrBtn.classList.remove('copied');
-                        copyQrBtn.innerHTML = '<span class="copy-icon">📋</span><span class="copy-text">Sao chép</span>';
+                        copyQrBtn.innerHTML = '<span class="copy-icon">📋</span><span class="copy-text">Copy</span>';
                     }, 2000);
                 } catch (err) {
-                    console.error('Lỗi khi sao chép ảnh: ', err);
-                    showToast('Lỗi khi sao chép ảnh');
+                    console.error('Error copying image: ', err);
+                    showToast('Error copying image');
                 }
             }, 'image/png');
         } catch (err) {
-            console.error('Lỗi khi tạo ảnh: ', err);
-            showToast('Lỗi khi tạo ảnh để sao chép');
+            console.error('Error creating image: ', err);
+            showToast('Error creating image to copy');
         }
     });
     
-    // QR code scanning from image file
+    // QR code scanning from image file using html5-qrcode
     formScan.addEventListener('submit', e => {
         e.preventDefault();
         outputText.value = '';
         const file = inputQRFile.files[0];
         if (!file) {
-            showToast('Vui lòng chọn hoặc dán ảnh chứa mã QR để quét.');
+            showToast('Please select or paste an image containing QR code to scan.');
             dropZone.focus();
             return;
         }
         if (!file.type.startsWith('image/')) {
-            showToast('File chọn phải là ảnh.');
+            showToast('Selected file must be an image.');
             return;
         }
 
@@ -343,31 +343,25 @@ document.addEventListener('DOMContentLoaded', () => {
         reader.onload = function (event) {
             const img = new Image();
             img.onload = () => {
-                // Create offscreen canvas to draw image for scanning
-                const offCanvas = document.createElement('canvas');
-                const offCtx = offCanvas.getContext('2d');
-                offCanvas.width = img.width;
-                offCanvas.height = img.height;
-                offCtx.drawImage(img, 0, 0);
-
-                const imageData = offCtx.getImageData(0, 0, offCanvas.width, offCanvas.height);
-                const code = jsQR(imageData.data, imageData.width, imageData.height, {
-                    inversionAttempts: 'attemptBoth'
-                });
-
-                if (code) {
-                    outputText.value = code.data;
-                } else {
-                    outputText.value = 'Không tìm thấy mã QR hợp lệ trong ảnh.';
-                }
+                // Create html5-qrcode scanner for image scanning
+                const html5QrCode = new Html5Qrcode('qr-reader');
+                
+                // Scan the image file
+                html5QrCode.scanFile(file, true)
+                    .then(decodedText => {
+                        outputText.value = decodedText;
+                    })
+                    .catch(err => {
+                        outputText.value = 'No valid QR code found in the image.';
+                    });
             };
             img.onerror = () => {
-                outputText.value = 'Lỗi khi tải ảnh. Vui lòng thử lại.';
+                outputText.value = 'Error loading image. Please try again.';
             };
             img.src = event.target.result;
         };
         reader.onerror = () => {
-            outputText.value = 'Lỗi khi đọc file. Vui lòng thử lại.';
+            outputText.value = 'Error reading file. Please try again.';
         };
         reader.readAsDataURL(file);
     });

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description"
-        content="Trang web tạo và quét mã QR từ văn bản. Chuyển đổi Text sang QR Code và ngược lại với nhiều tùy chọn, responsive và thân thiện người dùng." />
+        content="Web page for creating and scanning QR codes from text. Convert Text to QR Code and vice versa with multiple options, responsive and user-friendly." />
     <meta name="keywords"
-        content="QR Code, tạo mã QR, quét mã QR, chuyển đổi text sang QR, chuyển QR sang text, responsive, qrcode online" />
+        content="QR Code, create QR code, scan QR code, convert text to QR, convert QR to text, responsive, qrcode online" />
     <meta name="author" content="nquan" />
     <title>QR Code Generator and Scanner online</title>
 
@@ -15,7 +15,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="QR Code Generator and Scanner" />
     <meta property="og:description"
-        content="Tạo và quét mã QR từ văn bản với nhiều tùy chọn, chuẩn SEO và responsive." />
+        content="Web page for creating and scanning QR codes from text, convert Text to QR Code and vice versa with multiple options." />
     <meta property="og:url" content="https://tools.info.vn/qr-tool" />
     <meta property="og:site_name" content="QR Code Generator and Scanner" />
 
@@ -23,26 +23,26 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="QR Code Generator and Scanner" />
     <meta name="twitter:description"
-        content="Tạo và quét mã QR từ văn bản với nhiều tùy chọn, chuẩn SEO và responsive." />
+        content="Web page for creating and scanning QR codes from text, convert Text to QR Code and vice versa with multiple options." />
     <link rel="canonical" href="https://tools.info.vn/qr-tool/" />
 
     <!-- Structured Data JSON-LD -->
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "QR Code Generator and Scanner",
-  "url": "https://tools.info.vn/qr-tool",
-  "description": "Trang web tạo và quét mã QR từ văn bản, chuyển đổi Text sang QR Code và ngược lại với nhiều tùy chọn.",
-  "applicationCategory": "Utilities",
-  "operatingSystem": "All",
-  "browserRequirements": "Requires modern browser with JavaScript enabled",
-  "author": {
-    "@type": "Organization",
-    "name": "nquan"
-  }
-}
-</script>
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "QR Code Generator and Scanner",
+      "url": "https://tools.info.vn/qr-tool",
+      "description": "Web page for creating and scanning QR codes from text, convert Text to QR Code and vice versa with multiple options.",
+      "applicationCategory": "Utilities",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires modern browser with JavaScript enabled",
+      "author": {
+        "@type": "Organization",
+        "name": "nquan"
+      }
+    }
+    </script>
     <link rel="icon" type="image/png" href="./resource/repair_956125.png" sizes="32x32">
     <link rel="apple-touch-icon" href="./resource/repair_956125.png">
     <link rel="stylesheet" href="css/styles.css">
@@ -52,198 +52,199 @@
 <body>
     <header>
         <h1>QR Code Generator and Scanner</h1>
-        <p>Tạo và quét mã QR từ văn bản - Chuyển đổi Text QR Code</p>
+        <p>Create and scan QR codes from text - Convert Text QR Code</p>
     </header>
 
     <main class="main-container">
         <!-- Breadcrumb Navigation -->
         <nav aria-label="Breadcrumb" class="breadcrumb">
             <ol>
-                <li><a href="https://tools.info.vn">Trang chủ</a></li>
-                <li aria-current="page">Tạo và quét mã QR</li>
+                <li><a href="https://tools.info.vn">Home</a></li>
+                <li aria-current="page">Create and scan QR codes</li>
             </ol>
         </nav>
         <div class="sections-container">
             <section class="qr-section" aria-labelledby="section-generate-qr">
-                <h2 id="section-generate-qr">Tạo mã QR từ Text</h2>
+                <h2 id="section-generate-qr">Create QR Code from Text</h2>
                 <form id="form-generate-qr" aria-describedby="desc-generate-qr">
-                    <p id="desc-generate-qr">Nhập văn bản bạn muốn chuyển thành mã QR. Tùy chỉnh kích thước, màu sắc và logo
-                        nếu muốn.</p>
-                    <label for="input-text">Văn bản (Text):</label>
+                    <p id="desc-generate-qr">Enter the text you want to convert to QR code. Customize size, color and logo
+                        if desired.</p>
+                    <label for="input-text">Text:</label>
                     <textarea id="input-text" name="input-text" rows="4" required aria-required="true"
-                        placeholder="Nhập văn bản tại đây..."></textarea>
+                        placeholder="Enter text here..."></textarea>
 
                     <div class="flex-row">
                         <div class="flex-grow">
-                            <label for="input-size">Kích thước QR (px):</label>
+                            <label for="input-size">QR Size (px):</label>
                             <input type="number" id="input-size" name="input-size" min="100" max="1000" value="250"
                                 aria-describedby="size-help" />
-                            <small id="size-help">Từ 100 đến 1000 px</small>
+                            <small id="size-help">From 100 to 1000 px</small>
                         </div>
                         <div class="flex-grow">
-                            <label for="input-color">Màu QR:</label>
+                            <label for="input-color">QR Color:</label>
                             <input type="color" id="input-color" name="input-color" value="#000000"
                                 aria-describedby="color-help" />
-                            <small id="color-help">Chọn màu cho mã QR</small>
+                            <small id="color-help">Choose color for QR code</small>
                         </div>
                     </div>
 
-                    <label for="input-logo">Logo (tùy chọn):</label>
+                    <label for="input-logo">Logo (optional):</label>
                     <input type="file" id="input-logo" name="input-logo" accept="image/*" aria-describedby="logo-help" />
-                    <small id="logo-help">Chọn file ảnh logo để chèn vào giữa mã QR (tối đa 100x100 px)</small>
+                    <small id="logo-help">Choose image file for logo to insert in center of QR code (max 100x100 px)</small>
 
-                    <button type="submit" aria-label="Tạo mã QR từ văn bản">Tạo mã QR</button>
+                    <button type="submit" aria-label="Create QR code from text">Create QR Code</button>
                 </form>
                 <div class="qr-container" aria-live="polite" aria-atomic="true" aria-relevant="additions"
-                    aria-label="Kết quả mã QR">
+                    aria-label="QR Code result">
                     <canvas id="qr-canvas" role="img" aria-hidden="true"></canvas>
-                    <button class="qr-copy-btn" id="copy-qr-btn" title="Sao chép ảnh QR">
+                    <button class="qr-copy-btn" id="copy-qr-btn" title="Copy QR image">
                         <span class="copy-icon">📋</span>
-                        <span class="copy-text">Sao chép ảnh QR</span>
+                        <span class="copy-text">Copy QR Image</span>
                     </button>
                 </div>
             </section>
 
             <section class="qr-section" aria-labelledby="section-scan-qr">
-                <h2 id="section-scan-qr">Quét mã QR thành Text</h2>
+                <h2 id="section-scan-qr">Scan QR Code to Text</h2>
                 <form id="form-scan-qr" aria-describedby="desc-scan-qr">
-                    <b id="desc-scan-qr">Ấn (Ctrl+V) để dán ảnh hoặc chọn file để quét mã QR.</b>
+                    <b id="desc-scan-qr">Press (Ctrl+V) to paste image or select file to scan QR code.</b>
                     
                     <div id="drop-zone" class="drop-zone">
                         <div class="drop-zone-content">
                             <div class="drop-zone-icon">📁</div>
-                            <div class="drop-zone-text">Kéo thả ảnh vào đây hoặc nhấn để chọn file</div>
-                            <div class="drop-zone-or">hoặc</div>
-                            <div class="drop-zone-paste">Dán ảnh (Ctrl+V)</div>
+                            <div class="drop-zone-text">Drag and drop image here or click to select file</div>
+                            <div class="drop-zone-or">or</div>
+                            <div class="drop-zone-paste">Paste image (Ctrl+V)</div>
                             <input type="file" id="input-qr-file" name="input-qr-file" accept="image/*" class="drop-zone-input" />
                         </div>
                     </div>
                     
                     <div class="file-info" id="file-info"></div>
+                    <div id="qr-reader" style="display: none;"></div>
                     <div id="image-preview-container" class="image-preview-container" style="display: none;">
                         <div class="image-preview-wrapper">
                             <img id="image-preview" src="#" alt="Preview of selected image" class="image-preview" />
-                            <button type="button" id="remove-image" class="remove-image-btn" title="Xoá ảnh">
+                            <button type="button" id="remove-image" class="remove-image-btn" title="Remove image">
                                 <span class="remove-icon">✕</span>
                             </button>
                         </div>
                     </div>
-                    <button type="submit" class="scan-button" aria-label="Quét mã QR từ ảnh">Quét mã QR</button>
+                    <button type="submit" class="scan-button" aria-label="Scan QR code from image">Scan QR Code</button>
                 </form>
-                <label for="output-text">Kết quả văn bản:</label>
+                <label for="output-text">Result text:</label>
                 <div class="text-copy-container">
-                    <textarea id="output-text" class="result-textarea" readonly aria-label="Văn bản giải mã từ mã QR"></textarea>
-                    <button class="copy-btn" id="copy-text-btn" title="Sao chép văn bản">
+                    <textarea id="output-text" class="result-textarea" readonly aria-label="Text decoded from QR code"></textarea>
+                    <button class="copy-btn" id="copy-text-btn" title="Copy text">
                         <span class="copy-icon">📋</span>
-                        <span class="copy-text">Sao chép văn bản</span>
+                        <span class="copy-text">Copy Text</span>
                     </button>
                 </div>
             </section>
         </div>
 
         <section class="faq-section" aria-labelledby="section-faq">
-            <h2 id="section-faq">Câu hỏi thường gặp (FAQ)</h2>
+            <h2 id="section-faq">Frequently Asked Questions (FAQ)</h2>
             <div class="faq-container">
                 <div class="faq-item">
-                    <h3>Mã QR là gì?</h3>
-                    <p>Mã QR (Quick Response) là một mã vạch hai chiều có thể lưu trữ thông tin dưới dạng văn bản, URL, thông tin liên hệ, vị trí địa lý và nhiều hơn nữa. Mã QR có thể được quét bằng điện thoại thông minh hoặc máy quét mã QR.</p>
+                    <h3>What is a QR Code?</h3>
+                    <p>A QR Code (Quick Response) is a two-dimensional barcode that can store information in the form of text, URLs, contact information, geographic locations and much more. QR codes can be scanned using smartphones or QR code scanners.</p>
                 </div>
                 
                 <div class="faq-item">
-                    <h3>Tôi có thể tạo mã QR miễn phí không?</h3>
-                    <p>Có, công cụ tạo mã QR của chúng tôi hoàn toàn miễn phí. Bạn có thể tạo bao nhiêu mã QR tùy thích mà không cần trả phí.</p>
+                    <h3>Can I create QR codes for free?</h3>
+                    <p>Yes, our QR code generator tool is completely free. You can create as many QR codes as you like without any fees.</p>
                 </div>
                 
                 <div class="faq-item">
-                    <h3>Mã QR của tôi có hết hạn không?</h3>
-                    <p>Mã QR được tạo ra từ trang web này không bao giờ hết hạn. Tuy nhiên, nếu nó trỏ đến một URL và URL đó bị xóa hoặc thay đổi, mã QR sẽ không còn hoạt động nữa.</p>
+                    <h3>Will my QR codes expire?</h3>
+                    <p>QR codes generated from this website never expire. However, if it points to a URL and that URL is deleted or changed, the QR code will no longer work.</p>
                 </div>
                 
                 <div class="faq-item">
-                    <h3>Tôi có thể tùy chỉnh màu sắc của mã QR không?</h3>
-                    <p>Có, bạn có thể tùy chỉnh màu sắc của mã QR bằng cách sử dụng bảng chọn màu trong phần tạo mã QR.</p>
+                    <h3>Can I customize the color of QR codes?</h3>
+                    <p>Yes, you can customize the color of QR codes using the color picker in the QR code generation section.</p>
                 </div>
                 
                 <div class="faq-item">
-                    <h3>Làm cách nào để quét mã QR?</h3>
-                    <p>Bạn có thể sử dụng ứng dụng máy ảnh trên điện thoại thông minh hoặc tải ứng dụng quét mã QR từ cửa hàng ứng dụng. Nhiều điện thoại thông minh hiện đại đã tích hợp sẵn tính năng quét mã QR trong ứng dụng máy ảnh.</p>
+                    <h3>How do I scan QR codes?</h3>
+                    <p>You can use the camera app on your smartphone or download a QR code scanning app from the app store. Many modern smartphones already have built-in QR code scanning functionality in their camera apps.</p>
                 </div>
             </div>
         </section>
 
         <!-- Tutorial Section -->
         <section class="tutorial-section" aria-labelledby="section-tutorial">
-            <h2 id="section-tutorial">Hướng dẫn sử dụng</h2>
+            <h2 id="section-tutorial">How to use</h2>
             <div class="tutorial-steps">
                 <div class="tutorial-step">
-                    <h3><i class="fas fa-mouse-pointer"></i> Bước 1: Chọn chức năng</h3>
-                    <p>Chọn giữa tạo mã QR mới hoặc quét mã QR có sẵn từ ảnh.</p>
+                    <h3><i class="fas fa-mouse-pointer"></i> Step 1: Choose function</h3>
+                    <p>Choose between creating a new QR code or scanning an existing QR code from an image.</p>
                 </div>
                 <div class="tutorial-step">
-                    <h3><i class="fas fa-keyboard"></i> Bước 2: Nhập nội dung</h3>
-                    <p>Nhập văn bản hoặc URL bạn muốn chuyển đổi thành mã QR.</p>
+                    <h3><i class="fas fa-keyboard"></i> Step 2: Enter content</h3>
+                    <p>Enter the text or URL you want to convert to QR code.</p>
                 </div>
                 <div class="tutorial-step">
-                    <h3><i class="fas fa-magic"></i> Bước 3: Tùy chỉnh</h3>
-                    <p>Điều chỉnh kích thước, màu sắc và thêm logo nếu muốn.</p>
+                    <h3><i class="fas fa-magic"></i> Step 3: Customize</h3>
+                    <p>Adjust size, color and add logo if desired.</p>
                 </div>
                 <div class="tutorial-step">
-                    <h3><i class="fas fa-download"></i> Bước 4: Tải xuống</h3>
-                    <p>Tải về mã QR của bạn ở định dạng ảnh phù hợp.</p>
+                    <h3><i class="fas fa-download"></i> Step 4: Download</h3>
+                    <p>Download your QR code in appropriate image format.</p>
                 </div>
             </div>
         </section>
 
         <!-- Use Cases Section -->
         <section class="use-cases" aria-labelledby="section-use-cases">
-            <h2 id="section-use-cases">Ứng dụng thực tế</h2>
+            <h2 id="section-use-cases">Real-world Applications</h2>
             <div class="use-cases-grid">
                 <div class="use-case">
                     <i class="fas fa-link"></i>
-                    <h3>Chia sẻ liên kết</h3>
-                    <p>Chia sẻ URL website một cách nhanh chóng và tiện lợi.</p>
+                    <h3>Share links</h3>
+                    <p>Share website URLs quickly and conveniently.</p>
                 </div>
                 <div class="use-case">
                     <i class="fas fa-id-card"></i>
-                    <h3>Danh thiếp điện tử</h3>
-                    <p>Lưu trữ thông tin liên hệ dưới dạng mã QR.</p>
+                    <h3>Digital business cards</h3>
+                    <p>Store contact information in QR code format.</p>
                 </div>
                 <div class="use-case">
                     <i class="fas fa-wifi"></i>
-                    <h3>Kết nối WiFi</h3>
-                    <p>Tự động kết nối WiFi mà không cần nhập mật khẩu.</p>
+                    <h3>WiFi connection</h3>
+                    <p>Automatically connect to WiFi without entering password.</p>
                 </div>
                 <div class="use-case">
                     <i class="fas fa-map-marker-alt"></i>
-                    <h3>Định vị địa điểm</h3>
-                    <p>Chia sẻ tọa độ địa lý chính xác.</p>
+                    <h3>Location positioning</h3>
+                    <p>Share precise geographic coordinates.</p>
                 </div>
             </div>
         </section>
 
         <!-- Benefits Section -->
         <section class="benefits" aria-labelledby="section-benefits">
-            <h2 id="section-benefits">Tại sao nên sử dụng mã QR?</h2>
+            <h2 id="section-benefits">Why use QR codes?</h2>
             <div class="benefits-grid">
                 <div class="benefit">
                     <i class="fas fa-bolt"></i>
-                    <h3>Nhanh chóng</h3>
-                    <p>Truy cập thông tin chỉ với một lần quét, tiết kiệm thời gian và công sức.</p>
+                    <h3>Fast</h3>
+                    <p>Access information with just one scan, saving time and effort.</p>
                 </div>
                 <div class="benefit">
                     <i class="fas fa-mobile-alt"></i>
-                    <h3>Thân thiện di động</h3>
-                    <p>Dễ dàng sử dụng trên mọi thiết bị di động thông minh.</p>
+                    <h3>Mobile-friendly</h3>
+                    <p>Easy to use on all smart mobile devices.</p>
                 </div>
                 <div class="benefit">
                     <i class="fas fa-shield-alt"></i>
-                    <h3>Bảo mật</h3>
-                    <p>Mã hóa thông tin an toàn, khó làm giả hơn mã vạch thông thường.</p>
+                    <h3>Secure</h3>
+                    <p>Secure encrypted information, harder to counterfeit than regular barcodes.</p>
                 </div>
                 <div class="benefit">
                     <i class="fas fa-paint-brush"></i>
-                    <h3>Tùy chỉnh</h3>
-                    <p>Thay đổi màu sắc và thêm logo để phù hợp với thương hiệu.</p>
+                    <h3>Customizable</h3>
+                    <p>Change colors and add logos to match your brand.</p>
                 </div>
             </div>
         </section>
@@ -255,8 +256,8 @@
 
     <!-- QR Code generation library (QRCode.js) -->
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
-    <!-- QR Code scanning library (jsQR) -->
-    <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.min.js"></script>
+    <!-- QR Code scanning library (html5-qrcode) -->
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
     <!-- Main JavaScript file -->
     <script src="js/main.js" defer></script>
 </body>
