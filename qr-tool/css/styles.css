@@ -1,0 +1,591 @@
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+}
+
+/* Reset & base */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f9f9f9;
+    color: #2c3e50;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header, footer {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+
+header {
+    padding: 1rem 0;
+    text-align: center;
+    border-bottom: 2px solid #34495e;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+header p {
+    margin: 0.25rem 0 0;
+    font-size: 1rem;
+    color: #34495e;
+}
+
+/* Main layout */
+.main-container {
+    flex-grow: 1;
+    padding: 2rem 0;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.sections-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.qr-section {
+    flex: 1;
+    min-width: 300px;
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .sections-container {
+        flex-direction: column;
+    }
+    
+    .qr-section {
+        width: 100%;
+    }
+}
+
+section {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #34495e;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+input[type="text"],
+textarea,
+input[type="file"],
+select {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+input[type="file"]:focus,
+select:focus {
+    border-color: #2980b9;
+    outline: none;
+}
+
+button {
+    background-color: #2980b9;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:focus,
+button:hover {
+    background-color: #1c5980;
+    outline: none;
+}
+
+.qr-container {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+canvas#qr-canvas {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.result-textarea {
+    width: 100%;
+    height: 120px;
+    resize: vertical;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 4px 0 0 4px;
+    border: 1px solid #ccc;
+    border-right: none;
+    margin-top: 0.5rem;
+    font-family: monospace, monospace;
+    background-color: #f4f6f8;
+}
+
+.text-copy-container {
+    position: relative;
+    display: flex;
+    margin-top: 0.5rem;
+}
+
+.text-copy-container .result-textarea {
+    margin-top: 0;
+    border-radius: 4px 0 0 4px;
+}
+
+.copy-btn {
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    padding: 0 1rem;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.copy-btn:hover {
+    background-color: #1c5980;
+}
+
+.copy-btn.copied {
+    background-color: #27ae60;
+}
+
+.qr-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.qr-copy-btn {
+    margin-top: 10px;
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.qr-copy-btn:hover {
+    background-color: #1c5980;
+}
+
+.qr-copy-btn.copied {
+    background-color: #27ae60;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumb li {
+    display: inline;
+}
+
+.breadcrumb li:not(:last-child)::after {
+    content: "/";
+    margin: 0 0.5rem;
+    color: #6c757d;
+}
+
+.breadcrumb a {
+    color: #2980b9;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+    color: #1a5276;
+    text-decoration: underline;
+}
+
+.breadcrumb [aria-current="page"] {
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* Tutorial Section */
+.tutorial-section {
+    margin: 4rem 0;
+}
+
+.tutorial-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.tutorial-step {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #2980b9;
+    transition: all 0.3s ease;
+}
+
+.tutorial-step:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.tutorial-step h3 {
+    margin: 0 0 0.75rem 0;
+    color: #2c3e50;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tutorial-step i {
+    color: #2980b9;
+    font-size: 1.2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .tutorial-steps,
+    .use-cases-grid,
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tutorial-step,
+    .use-case,
+    .benefit {
+        margin-bottom: 1rem;
+    }
+    
+    .tutorial-step:last-child,
+    .use-case:last-child,
+    .benefit:last-child {
+        margin-bottom: 0;
+    }
+    
+    .tutorial-section,
+    .use-cases,
+    .benefits,
+    .faq-section {
+        margin: 2.5rem 0;
+    }
+}
+
+/* Use Cases Section */
+.use-cases {
+    margin: 4rem 0;
+}
+
+.use-cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.use-case {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.use-case:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.use-case i {
+    font-size: 2.5rem;
+    color: #2980b9;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.use-case:hover i {
+    transform: scale(1.1);
+}
+
+.use-case h3 {
+    margin: 0.5rem 0;
+    color: #2c3e50;
+    font-size: 1.2rem;
+}
+
+/* Benefits Section */
+.benefits {
+    margin: 4rem 0;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.benefit {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
+.benefit:hover {
+    background: #fff;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.benefit i {
+    font-size: 2.5rem;
+    color: #2980b9;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.benefit:hover i {
+    transform: scale(1.1);
+}
+
+.benefit h3 {
+    margin: 1rem 0 0.75rem;
+    color: #2c3e50;
+    font-size: 1.2rem;
+}
+
+/* FAQ Section */
+.faq-section {
+    margin: 4rem 0;
+}
+
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.faq-item {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.25rem;
+    transition: all 0.3s ease;
+    border-left: 4px solid #2980b9;
+}
+
+.faq-item h3 {
+    margin: 0 0 0.75rem 0;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.faq-item p {
+    margin: 0;
+    color: #34495e;
+    line-height: 1.6;
+}
+
+.faq-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Image Preview Styles */
+.image-preview-container {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.image-preview-wrapper {
+    position: relative;
+    max-width: 100%;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    display: inline-block;
+}
+
+.image-preview {
+    max-width: 100%;
+    max-height: 300px;
+    display: block;
+    border-radius: 4px;
+}
+
+.remove-image-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 28px;
+    height: 28px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.remove-image-btn:hover {
+    background-color: #c0392b;
+}
+
+.remove-image-btn .remove-icon {
+    display: inline-block;
+    line-height: 1;
+}
+
+.text-copy-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.result-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    font-family: monospace;
+    background-color: #f8f9fa;
+    margin-bottom: 8px;
+}
+
+.copy-btn {
+    align-self: flex-end;
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.copy-btn:hover, .qr-copy-btn:hover {
+    background-color: #1c5980;
+}
+
+.copy-btn.copied, .qr-copy-btn.copied {
+    background-color: #27ae60;
+}
+
+.flex-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.flex-grow {
+    flex-grow: 1;
+}
+
+@media (max-width: 600px) {
+    .flex-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    border-top: 1px solid #ddd;
+}

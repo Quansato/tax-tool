@@ -231,4 +231,50 @@ document.addEventListener('DOMContentLoaded', function() {
     const incomeInput = document.getElementById('income');
     incomeInput.value = formatCurrencyInput('25000000');
     incomeInput.setAttribute('data-value', '25000000');
+    
+    // Tab dropdown functionality
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    
+    if (dropdownToggle && dropdownMenu) {
+        dropdownToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            this.classList.toggle('active');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownToggle.setAttribute('aria-expanded', 'false');
+                dropdownToggle.classList.remove('active');
+            }
+        });
+        
+        // Handle dropdown item clicks
+        const dropdownItems = document.querySelectorAll('.dropdown-item');
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                const tool = this.getAttribute('data-tool');
+                const href = this.getAttribute('href');
+                
+                // QR Tool is available, redirect directly
+                if (tool === 'qr' && href && href !== '#') {
+                    window.location.href = href;
+                    return;
+                }
+                
+                // Other tools show coming soon alert
+                if (tool && href === '#') {
+                    e.preventDefault();
+                    alert('Công cụ này đang được phát triển và sẽ sớm ra mắt!\n\nVui lòng quay lại sau hoặc sử dụng các công cụ có sẵn:\n- Tính thuế TNCN\n- Tính thuế HKD\n- QR Tool');
+                }
+                
+                // Close dropdown
+                dropdownToggle.setAttribute('aria-expanded', 'false');
+                dropdownToggle.classList.remove('active');
+            });
+        });
+    }
 });
