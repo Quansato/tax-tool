@@ -96,6 +96,35 @@ function calculateGtgtTax(revenue, isRegistered = true) {
     return Math.round(revenue * 0.05); // 5% doanh thu
 }
 
+// Sao chép kết quả tính thuế HKD
+function copyHkdResults() {
+    const fields = [
+        { id: 'revenueResult', label: 'Doanh thu năm' },
+        { id: 'monBaiResult', label: 'Thuế môn bài' },
+        { id: 'tncnResult', label: 'Thuế TNCN' },
+        { id: 'gtgtResult', label: 'Thuế GTGT' },
+        { id: 'totalTaxResult', label: 'Tổng thuế phải nộp' },
+        { id: 'profitResult', label: 'Lợi nhuận sau thuế' },
+    ];
+
+    const lines = fields.map(({ id, label }) => {
+        const el = document.getElementById(id);
+        return el ? `${label}: ${el.textContent}` : null;
+    }).filter(Boolean);
+
+    if (!lines.length) {
+        alert('Không có dữ liệu để sao chép. Vui lòng nhập thông tin trước.');
+        return;
+    }
+
+    const note = 'Giả định: GTGT 5% nếu đăng ký; thuế khoán theo ngành/khu vực; môn bài 1-3 triệu/năm.';
+    const content = [...lines, note].join('\n');
+
+    navigator.clipboard?.writeText(content)
+        .then(() => alert('Đã sao chép kết quả vào clipboard.'))
+        .catch(() => alert('Không thể sao chép. Vui lòng thử lại hoặc kiểm tra quyền trình duyệt.'));
+}
+
 function calculateTax() {
     // Lấy giá trị input
     const revenue = parseFloat(document.getElementById('revenue').getAttribute('data-value')) || 0;
@@ -175,6 +204,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('input[name="calculationMethod"]').forEach(radio => {
         radio.addEventListener('change', updateCalculationMethod);
     });
+
+    // Sao chép kết quả
+    document.getElementById('copyHkdResult')?.addEventListener('click', copyHkdResults);
     
     // Tính toán lần đầu
     calculateTax();

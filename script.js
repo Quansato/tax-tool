@@ -44,34 +44,31 @@ function handleCurrencyInput(input) {
     return parseFloat(input.getAttribute('data-value')) || 0;
 }
 
-function calculateProgressiveTax(taxableIncome, bracketType = '5') {
+let hasCalculated = false;
+
+function hideResults() {
+    const results = document.getElementById('results');
+    if (results) results.style.display = 'none';
+}
+
+function showResults() {
+    const results = document.getElementById('results');
+    if (results) results.style.display = 'block';
+}
+
+function calculateProgressiveTax(taxableIncome) {
     let tax = 0;
     
     if (taxableIncome <= 0) return 0;
     
-    let brackets;
-    
-    if (bracketType === '5') {
-        // 5-bracket tax rate (from 01/07/2026)
-        brackets = [
-            { min: 0, max: 10000000, rate: 0.05 },
-            { min: 10000000, max: 30000000, rate: 0.10 },
-            { min: 30000000, max: 60000000, rate: 0.20 },
-            { min: 60000000, max: 100000000, rate: 0.30 },
-            { min: 100000000, max: Infinity, rate: 0.35 }
-        ];
-    } else {
-        // 7-bracket tax rate (current)
-        brackets = [
-            { min: 0, max: 5000000, rate: 0.05 },
-            { min: 5000000, max: 10000000, rate: 0.10 },
-            { min: 10000000, max: 18000000, rate: 0.15 },
-            { min: 18000000, max: 32000000, rate: 0.20 },
-            { min: 32000000, max: 52000000, rate: 0.25 },
-            { min: 52000000, max: 80000000, rate: 0.30 },
-            { min: 80000000, max: Infinity, rate: 0.35 }
-        ];
-    }
+    // Biểu thuế 5 bậc (áp dụng 2026)
+    const brackets = [
+        { min: 0, max: 10000000, rate: 0.05 },
+        { min: 10000000, max: 30000000, rate: 0.10 },
+        { min: 30000000, max: 60000000, rate: 0.20 },
+        { min: 60000000, max: 100000000, rate: 0.30 },
+        { min: 100000000, max: Infinity, rate: 0.35 }
+    ];
     
     for (let bracket of brackets) {
         if (taxableIncome > bracket.min) {
@@ -97,21 +94,30 @@ function closeTaxResultPopup() {
     document.body.style.overflow = 'auto'; // Re-enable scrolling
 }
 
-function calculateTax(showPopup = false) {
+function calculateTax(showPopup = false, markCalculated = false) {
+    if (markCalculated) {
+        hasCalculated = true;
+        showResults();
+    }
+
+    if (!hasCalculated) {
+        return;
+    }
     // Lấy giá trị input
     const income = parseFloat(document.getElementById('income').getAttribute('data-value')) || 0;
     const dependents = parseInt(document.getElementById('dependents').value) || 0;
     const insuranceSalary = parseFloat(document.getElementById('insuranceSalary').getAttribute('data-value')) || 0;
-    const selectedBracket = document.querySelector('input[name="taxBracket"]:checked').value;
     
     // Tính toán
     const insuranceAmount = insuranceSalary * 0.105; // 10.5% của lương đóng bảo hiểm
     const personalDeduction = 15500000; // 15.5 triệu
     const dependentDeduction = 6200000 * dependents; // 6.2 triệu/người
+    
     const totalDeduction = personalDeduction + dependentDeduction;
     
     const taxableIncome = Math.max(0, income - insuranceAmount - totalDeduction);
-    const taxAmount = calculateProgressiveTax(taxableIncome, selectedBracket);
+    const taxAmount = calculateProgressiveTax(taxableIncome);
+
     const netIncome = income - insuranceAmount - taxAmount;
     
     // Cập nhật kết quả trên giao diện chính
@@ -134,6 +140,35 @@ function calculateTax(showPopup = false) {
     if (showPopup && window.innerWidth <= 840) {
         showTaxResultPopup();
     }
+}
+
+// Sao chép kết quả tính thuế
+function copyTaxResults() {
+    const fields = [
+        { id: 'originalIncome', label: 'Thu nhập ban đầu' },
+        { id: 'insuranceAmount', label: 'Bảo hiểm bắt buộc' },
+        { id: 'deduction', label: 'Giảm trừ gia cảnh' },
+        { id: 'taxableIncome', label: 'Thu nhập tính thuế' },
+        { id: 'taxAmount', label: 'Thuế TNCN phải nộp' },
+        { id: 'netIncome', label: 'Thu nhập thực nhận' }
+    ];
+
+    const lines = fields.map(({ id, label }) => {
+        const el = document.getElementById(id);
+        return el ? `${label}: ${el.textContent}` : null;
+    }).filter(Boolean);
+
+    if (!lines.length) {
+        alert('Không có dữ liệu để sao chép. Vui lòng nhập thông tin trước.');
+        return;
+    }
+
+    const note = 'Giả định: BH 10.5% trên lương đóng BH; giảm trừ bản thân 15.5m, phụ thuộc 6.2m/người.';
+    const content = [...lines, note].join('\n');
+
+    navigator.clipboard?.writeText(content)
+        .then(() => alert('Đã sao chép kết quả vào clipboard.'))
+        .catch(() => alert('Không thể sao chép. Vui lòng thử lại hoặc kiểm tra quyền trình duyệt.'));
 }
 
 // Thêm sự kiện cho các ô nhập liệu tiền tệ
@@ -191,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Thêm sự kiện cho nút tính thuế
     document.getElementById('tax').addEventListener('click', function() {
-        calculateTax(true); // true để hiển thị popup
+        calculateTax(true, true); // hiển thị popup trên mobile và đánh dấu đã tính
     });
     
     // Thêm sự kiện cho dropdown phụ thuộc
@@ -227,10 +262,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Tính toán lần đầu
     calculateTax(false);
     
+    // Ẩn kết quả cho tới khi bấm Tính thuế
+    hideResults();
+    
     // Định dạng giá trị ban đầu cho thu nhập
     const incomeInput = document.getElementById('income');
     incomeInput.value = formatCurrencyInput('25000000');
     incomeInput.setAttribute('data-value', '25000000');
+    
+    // Copy kết quả
+    document.getElementById('copyTaxResult')?.addEventListener('click', copyTaxResults);
     
     // Tab dropdown functionality
     const dropdownToggle = document.querySelector('.dropdown-toggle');

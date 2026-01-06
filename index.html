@@ -174,15 +174,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Biểu thuế:</label>
+                    <label>Biểu thuế áp dụng:</label>
                     <div class="tax-option">
-                        <label class="radio-label">
-                            <input type="radio" name="taxBracket" value="5" checked>
-                            <span>5 bậc</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="taxBracket" value="7">
-                            <span>7 bậc</span>
+                        <label class="radio-label" style="cursor: default;">
+                            <input type="radio" name="taxBracket" value="5" checked disabled>
+                            <span>5 bậc (áp dụng 2026)</span>
                         </label>
                     </div>
                 </div>
@@ -284,6 +280,10 @@
                         </tr>
                     </tbody>
                 </table>
+
+                <div class="action-buttons" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+                    <button class="btn" id="copyTaxResult" type="button">Sao chép kết quả</button>
+                </div>
             </div>
         </div>
 
@@ -306,7 +306,7 @@
                 <div class="tutorial-step">
                     <div class="step-icon">3</div>
                     <h3>Xem kết quả</h3>
-                    <p>Hệ thống tự động khấu trừ bảo hiểm, giảm trừ gia cảnh, tính thuế theo biểu 7 bậc hiện hành hoặc 5 bậc dự kiến từ 01/07/2026.</p>
+                    <p>Hệ thống tự động khấu trừ bảo hiểm, giảm trừ gia cảnh và tính thuế theo <strong>biểu 5 bậc 2026</strong>.</p>
                 </div>
                 <div class="tutorial-step">
                     <div class="step-icon">4</div>
@@ -314,6 +314,21 @@
                     <p>Tải/in kết quả để lưu cùng hồ sơ tạm nộp/quyết toán thuế, phục vụ đối chiếu với kế toán hoặc cơ quan thuế.</p>
                 </div>
             </div>
+        </section>
+
+        <!-- Công thức & giả định -->
+        <section class="content-section" aria-labelledby="formula-title">
+            <h2 id="formula-title" class="section-title">🧮 Công thức & giả định</h2>
+            <div class="note-box">
+                <ul>
+                    <li>Bảo hiểm bắt buộc: <strong>10.5%</strong> trên lương đóng BH (<code>insuranceSalary</code>).</li>
+                    <li>Giảm trừ gia cảnh 2026: <strong>15.5 triệu/tháng</strong> (bản thân) + <strong>6.2 triệu/người/tháng</strong> (phụ thuộc).</li>
+                    <li>Thu nhập tính thuế = Thu nhập chịu thuế - BH bắt buộc - Giảm trừ gia cảnh.</li>
+                    <li>Thuế lũy tiến từng phần: áp dụng <strong>5 bậc 2026</strong>, cộng dồn từng bậc.</li>
+                    <li>Thu nhập thực nhận = Thu nhập chịu thuế - BH bắt buộc - Thuế TNCN.</li>
+                </ul>
+            </div>
+            <p class="reference">Nguồn: Tổng cục Thuế (GDT), Thư viện Pháp luật. Cập nhật: 01/01/2026.</p>
         </section>
 
         <!-- Các trường hợp sử dụng -->

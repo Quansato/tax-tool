@@ -197,13 +197,11 @@
                             <span style="font-weight: bold;" id="profitResult">0 đ</span>
                         </div>
                     </div>
-                </div>
 
-                <h3 style="margin-top: 30px; color: #1E293B;">📊 Biểu thuế HKD 2026</h3>
-                <table class="tax-table">
-                    <thead>
-                        <tr>
-                            <th>Loại hình</th>
+                    <div class="action-buttons" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+                        <button class="btn" id="copyHkdResult" type="button">Sao chép kết quả</button>
+                    </div>
+                </div>
                             <th>Khu vực</th>
                             <th>Thuế môn bài</th>
                             <th>Thuế TNCN khoán</th>
@@ -276,6 +274,21 @@
                     <p>Hệ thống tự động tính toán thuế môn bài, thuế TNCN, thuế GTGT và tổng thuế phải nộp.</p>
                 </div>
             </div>
+        </section>
+
+        <!-- Công thức & giả định HKD -->
+        <section class="content-section" aria-labelledby="formula-hkd">
+            <h2 id="formula-hkd" class="section-title">🧮 Công thức & giả định (HKD)</h2>
+            <div class="note-box">
+                <ul>
+                    <li>Thuế môn bài: 1.000.000 – 3.000.000 đ/năm, phụ thuộc ngành và khu vực.</li>
+                    <li>Phương pháp khoán: TNCN = Doanh thu × tỷ lệ khoán ngành/khu vực, có giảm trừ theo số lao động.</li>
+                    <li>Phương pháp tỷ lệ %: TNCN = Doanh thu × tỷ lệ % ngành.</li>
+                    <li>GTGT: mặc định 5% doanh thu nếu đăng ký; có thể điều chỉnh theo thực tế.</li>
+                    <li>Lợi nhuận sau thuế = Doanh thu - (Môn bài + TNCN + GTGT).</li>
+                </ul>
+            </div>
+            <p class="reference">Nguồn: Tổng cục Thuế, Thư viện Pháp luật. Cập nhật: 01/01/2026.</p>
         </section>
 
         <!-- Các trường hợp sử dụng -->
